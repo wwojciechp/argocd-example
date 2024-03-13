@@ -23,10 +23,7 @@ http {
    server {
        listen 80;
        location / {
-           return 200 "Hello world!";
-       }
-       location /version {
-           return 200 $nginx_version;
+           return 200 "Nginx version: $nginx_version";
        }
    }
 }
