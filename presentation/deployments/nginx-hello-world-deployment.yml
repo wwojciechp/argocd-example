@@ -32,7 +32,7 @@ http {
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-v3
+  name: nginx-v4
 spec:
   selector:
     matchLabels:
@@ -45,7 +45,7 @@ spec:
         app: nginx
     spec:
       containers:
-      - image: nginx:1.25
+      - image: nginx:1.16
         name: nginx
         ports:
         - containerPort: 80
