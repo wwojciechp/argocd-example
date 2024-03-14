@@ -34,6 +34,7 @@ kind: Deployment
 metadata:
   name: nginx-v1
 spec:
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: nginx
@@ -45,7 +46,7 @@ spec:
         app: nginx
     spec:
       containers:
-      - image: nginx:1.15
+      - image: nginx:1.11
         name: nginx
         ports:
         - containerPort: 80
