@@ -20,11 +20,11 @@ spec:
         ports:
         - containerPort: 80
           name: web
-#        resources:
-#          limits:
-#            memory: 50Mi
-#          requests:
-#            memory: 50Mi
+        resources:
+          limits:
+            memory: 50Mi
+          requests:
+            memory: 50Mi
         volumeMounts:
           - name: config-vol
             mountPath: /etc/nginx/
