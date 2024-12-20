@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-exaple-ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+  labels:
+    app: nginx-argocd-test
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                port:
+                  number: 80
+                name: nginx-argocd-test
+      host: argocd-test.develop.flowee.finture.com

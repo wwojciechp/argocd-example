@@ -1,63 +1,37 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx
-spec:
-  type: NodePort
-  ports:
-  - port: 80
-    targetPort: 80
-    nodePort: 30001
-  selector:
-    app: nginx
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: nginx-config
-data:
-  nginx.conf: '
-events {
-}
-http {
-   server {
-       listen 80;
-       location / {
-           return 200 "Nginx version: $nginx_version";
-       }
-   }
-}
-'
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-v1
+  name: nginx-argocd-test
 spec:
   revisionHistoryLimit: 0
   selector:
     matchLabels:
-      app: nginx
+      app: nginx-argocd-test
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: nginx
+        app: nginx-argocd-test
     spec:
       containers:
       - image: nginx:1.22
-        name: nginx
+        name: nginx-argocd-test
         ports:
         - containerPort: 80
           name: web
+        resources:
+          limits:
+            memory: 50Mi
+          requests:
+            memory: 50Mi
         volumeMounts:
           - name: config-vol
             mountPath: /etc/nginx/
       volumes:
         - name: config-vol
           configMap:
-            name: nginx-config
+            name: nginx-argocd-test
             items:
               - key: nginx.conf
                 path: nginx.conf
