@@ -15,7 +15,7 @@ spec:
         app: nginx-argocd-test
     spec:
       containers:
-      - image: nginx:1.18
+      - image: nginx:1.22
         name: nginx-argocd-test
         ports:
         - containerPort: 80
